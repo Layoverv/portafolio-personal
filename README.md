@@ -225,7 +225,6 @@ Todo se edita en `frontend/src/data/`, sin tocar componentes:
 - Enviar el formulario a través del backend (por ejemplo con Nodemailer) en lugar de Formspree.
 - Tema claro opcional y selector de idioma (español/inglés).
 - Panel para editar proyectos sin tocar código (por ejemplo con una base de datos).
-- Despliegue: frontend en Vercel o Netlify y backend en Render o Railway.
 
 ---
 
@@ -254,3 +253,29 @@ git push -u origin main
 ```
 
 Antes de hacer `git add`, confirma con `git status` que **no** aparece ningún archivo `.env`.
+
+## Desplegar en Vercel
+
+El proyecto se publica como **un solo proyecto de Vercel**: el frontend se sirve como sitio estático y el backend de Express corre como función serverless en `/api`. Al quedar en el mismo dominio no hace falta configurar CORS ni `VITE_API_URL`.
+
+| Archivo | Para qué sirve |
+|---|---|
+| `vercel.json` | Instala ambas carpetas, compila el frontend, publica `frontend/dist` y redirige `/api/*` a la función. Las demás rutas van a `index.html` (navegación de React Router). |
+| `api/index.mjs` | La función serverless: exporta la app de Express (`backend/src/app.js`) sin `app.listen()`. |
+
+Pasos:
+
+1. Entra a https://vercel.com/new e importa el repositorio de GitHub.
+2. Deja **Root Directory** en la raíz del repositorio (no en `frontend`). El resto de la configuración la toma de `vercel.json`.
+3. En **Environment Variables** agrega:
+   - `GEMINI_API_KEY` = tu clave de Gemini (**solo aquí**, nunca en el código).
+   - `GEMINI_MODEL` = `gemini-flash-latest` (opcional).
+4. Pulsa **Deploy**.
+5. Comprueba `https://TU-PROYECTO.vercel.app/api/health`: debe responder `"aiConfigured": true`.
+
+Notas:
+
+- Si cambias la clave en Vercel, vuelve a desplegar (**Deployments → Redeploy**) para que la función la lea.
+- El limitador de mensajes guarda los contadores en memoria, así que en Vercel cada instancia de la función cuenta por separado. Para un portafolio es suficiente.
+- En Vercel la app confía en el proxy (`trust proxy`) para conocer la IP real del visitante; en local no.
+

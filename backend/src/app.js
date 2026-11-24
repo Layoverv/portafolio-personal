@@ -14,6 +14,11 @@ export function createApp({ generateReply = geminiReply, rateLimit = config.rate
   const app = express();
 
   app.disable('x-powered-by'); // no revela que el servidor usa Express
+
+  // En Vercel las peticiones pasan por su proxy. Sin esto, req.ip sería la IP
+  // del proxy y el limitador trataría a todos los visitantes como uno solo.
+  // Solo se activa allí: en local nadie debe poder falsear su IP con cabeceras.
+  if (process.env.VERCEL) app.set('trust proxy', 1);
   app.use(cors({ origin: config.frontendUrls }));
   app.use(express.json({ limit: '20kb' })); // cuerpos pequeños: evita abusos
 
