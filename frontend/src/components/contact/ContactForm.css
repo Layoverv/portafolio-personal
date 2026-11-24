@@ -1,0 +1,29 @@
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.contact-form:hover {
+  transform: none;
+}
+
+.contact-form__grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .contact-form__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+.contact-form .is-loading svg {
+  animation: spin 0.9s linear infinite;
+}

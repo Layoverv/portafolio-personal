@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (NUNCA subir la API Key)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Compilados
+dist/
+coverage/
+
+# Registros
+*.log
+npm-debug.log*
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/

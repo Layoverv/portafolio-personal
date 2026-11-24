@@ -1,0 +1,121 @@
+/* =============================================================
+   CORTINA DE TRANSICIÓN ENTRE SECCIONES
+   Dos capas: un destello rojo brillante que va adelante y el
+   panel oscuro de vidrio con el kanji 炎. Solo se anima transform
+   y opacity, así el navegador lo procesa con la GPU.
+   ============================================================= */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.curtain--cover,
+.curtain--reveal {
+  visibility: visible;
+  pointer-events: auto; /* bloquea clics mientras dura la transición */
+}
+
+.curtain__flare,
+.curtain__panel {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 130%;
+  top: -15%;
+  transform: translateY(110%) skewY(-6deg);
+  will-change: transform;
+}
+
+/* Capa delantera: franja de brasa */
+.curtain__flare {
+  background: var(--gradient-ember);
+  box-shadow: 0 0 80px rgba(var(--primary-rgb), 0.8);
+}
+
+/* Capa principal: rojo muy oscuro con resplandor y grano */
+.curtain__panel {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(600px circle at 50% 50%, rgba(var(--primary-rgb), 0.35), transparent 65%),
+    linear-gradient(180deg, #2a0508, #0b0203);
+  border-top: 1px solid rgba(255, 180, 160, 0.4);
+}
+
+.curtain__kanji {
+  font-size: clamp(5rem, 16vw, 10rem);
+  color: #ffd9cc;
+  opacity: 0;
+  transform: skewY(6deg) scale(0.8);
+  text-shadow: 0 0 30px rgba(var(--primary-rgb), 0.9), 0 0 80px rgba(var(--primary-rgb), 0.5);
+}
+
+/* ----- 1. Tapar: la franja sube primero y el panel la sigue ----- */
+.curtain--cover .curtain__flare {
+  animation: curtainIn 420ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+.curtain--cover .curtain__panel {
+  animation: curtainIn 460ms cubic-bezier(0.7, 0, 0.3, 1) 40ms both;
+}
+
+.curtain--cover .curtain__kanji {
+  animation: kanjiIn 380ms ease 200ms both;
+}
+
+/* ----- 2. Descubrir: todo sale por arriba ----- */
+.curtain--reveal .curtain__panel {
+  animation: curtainOut 520ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+.curtain--reveal .curtain__flare {
+  animation: curtainOut 520ms cubic-bezier(0.7, 0, 0.3, 1) 60ms both;
+}
+
+.curtain--reveal .curtain__kanji {
+  opacity: 1;
+  animation: kanjiOut 260ms ease both;
+}
+
+@keyframes curtainIn {
+  from {
+    transform: translateY(110%) skewY(-6deg);
+  }
+  to {
+    transform: translateY(0) skewY(0deg);
+  }
+}
+
+@keyframes curtainOut {
+  from {
+    transform: translateY(0) skewY(0deg);
+  }
+  to {
+    transform: translateY(-115%) skewY(-6deg);
+  }
+}
+
+@keyframes kanjiIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes kanjiOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}

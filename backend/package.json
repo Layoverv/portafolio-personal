@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-ai-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Backend en Express para el asistente IA del portafolio (Gemini).",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@google/genai": "2.32.0",
+    "cors": "2.8.5",
+    "dotenv": "16.6.1",
+    "express": "4.22.3"
+  }
+}

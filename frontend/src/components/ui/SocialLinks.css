@@ -1,0 +1,23 @@
+.social-links {
+  display: flex;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.social-links a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  transition: color var(--transition), border-color var(--transition), transform var(--transition-fast);
+}
+
+.social-links a:hover {
+  color: var(--color-primary);
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}

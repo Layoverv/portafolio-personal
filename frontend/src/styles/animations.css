@@ -1,0 +1,141 @@
+/* =============================================================
+   ANIMACIONES
+   Solo se animan transform y opacity: el navegador las procesa
+   con la GPU y no afectan el rendimiento.
+   ============================================================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Entrada de la sección nueva cuando se retira la cortina roja */
+.page-transition {
+  /* "backwards" (no "both"): al terminar, el filtro y la transformación se quitan del todo.
+     Si quedaran como blur(0px), Chrome mezcla mal las capas de vidrio y oscurece el texto. */
+  animation: pageIn 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms backwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.985);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Entrada escalonada: agrega .reveal y un delay con style={{ '--delay': '120ms' }} */
+.reveal {
+  animation: fadeUp 600ms ease both;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Respeta a quien pide menos movimiento en su sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Los tres puntos del indicador "escribiendo..." */
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+/* Destello que aparece y se apaga */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+/* Respiración de la llama del logo */
+@keyframes ember {
+  0%, 100% {
+    text-shadow: 0 0 12px rgba(var(--primary-rgb), 0.6), 0 0 28px rgba(var(--primary-rgb), 0.25);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(var(--accent-rgb), 0.85), 0 0 46px rgba(var(--primary-rgb), 0.45);
+  }
+}
+
+/* Desplazamiento lento de la imagen del héroe */
+@keyframes drift {
+  from {
+    transform: scale(1.08) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-1.5%, -1%, 0);
+  }
+}
