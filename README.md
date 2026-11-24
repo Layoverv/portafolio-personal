@@ -208,7 +208,7 @@ Todo se edita en `frontend/src/data/`, sin tocar componentes:
 
 ## 14. Capturas de pantalla
 
-| Proyectos y sidebar | Tecnologías |
+| Proyectos y sidebar (proyecto con imagen que se quema) | Tecnologías |
 | --- | --- |
 | ![Proyectos](docs/capturas/proyectos-sidebar.png) | ![Tecnologías](docs/capturas/tecnologias.png) |
 
@@ -216,7 +216,6 @@ Todo se edita en `frontend/src/data/`, sin tocar componentes:
 | --- | --- | --- |
 | ![Asistente](docs/capturas/asistente.png) | ![Chat móvil](docs/capturas/chat-movil.png) | ![Contacto](docs/capturas/contacto-validacion.png) |
 
-> La captura del asistente muestra el aviso que aparece cuando aún no hay API Key configurada.
 
 ## 15. Posibles mejoras
 
