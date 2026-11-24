@@ -278,3 +278,21 @@ Notas:
 - El limitador de mensajes guarda los contadores en memoria, así que en Vercel cada instancia de la función cuenta por separado. Para un portafolio es suficiente.
 - En Vercel la app confía en el proxy (`trust proxy`) para conocer la IP real del visitante; en local no.
 
+
+## Vista previa al compartir el enlace
+
+Al compartir el enlace en WhatsApp, Discord, LinkedIn, X o Telegram aparece una tarjeta grande con la imagen `frontend/public/og-image.jpg` (1200×630 px, menos de 300 KB). Las etiquetas Open Graph están en `frontend/index.html`, y `vite.config.js` les pone la URL pública al compilar. En Vercel la toma sola de `VERCEL_PROJECT_PRODUCTION_URL`; con un dominio propio, define `SITE_URL` en Vercel.
+
+**Comprobar que funciona** (después de desplegar):
+
+- Abre `https://TU-PROYECTO.vercel.app/og-image.jpg`: debe verse la imagen.
+- https://www.opengraph.xyz : pega tu URL y muestra cómo se verá en cada red.
+- LinkedIn Post Inspector: https://www.linkedin.com/post-inspector/
+- Facebook / WhatsApp: https://developers.facebook.com/tools/debug/ (WhatsApp usa el mismo lector que Facebook).
+
+**Actualizar la vista previa** si cambias la imagen: las plataformas guardan la tarjeta en caché.
+
+- LinkedIn: vuelve a inspeccionar la URL en el Post Inspector.
+- Facebook / WhatsApp: en el Sharing Debugger pulsa **Scrape Again**. En WhatsApp, además, los chats donde ya compartiste el enlace conservan la tarjeta vieja.
+- Discord y otras: comparte la URL con un parámetro nuevo, por ejemplo `https://TU-PROYECTO.vercel.app/?v=2`, para que la lean como un enlace distinto.
+- Para forzarlo en todas, cambia también el nombre del archivo (por ejemplo `og-image-v2.jpg`) y actualízalo en `index.html`.
