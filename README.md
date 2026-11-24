@@ -281,7 +281,7 @@ Notas:
 
 ## Vista previa al compartir el enlace
 
-Al compartir el enlace en WhatsApp, Discord, LinkedIn, X o Telegram aparece una tarjeta grande con la imagen `frontend/public/og-image.jpg` (1200×630 px, menos de 300 KB). Las etiquetas Open Graph están en `frontend/index.html`, y `vite.config.js` les pone la URL pública al compilar. En Vercel la toma sola de `VERCEL_PROJECT_PRODUCTION_URL`; con un dominio propio, define `SITE_URL` en Vercel.
+Al compartir el enlace en WhatsApp, Discord, LinkedIn, X o Telegram aparece una tarjeta grande con la imagen `frontend/public/og-image.jpg` (1200×600 px, menos de 300 KB). Sale del banner `asets/PREVEW/vista-previa-banner.png`; si lo cambias, vuelve a exportarlo como JPG de menos de 300 KB. Las etiquetas Open Graph están en `frontend/index.html`, y `vite.config.js` les pone la URL pública al compilar. En Vercel la toma sola de `VERCEL_PROJECT_PRODUCTION_URL`; con un dominio propio, define `SITE_URL` en Vercel.
 
 **Comprobar que funciona** (después de desplegar):
 
